@@ -3,21 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Мои закладки</title>
+<title>All in One</title>
 <style>
     * { box-sizing: border-box; }
+
+    html, body {
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -webkit-touch-callout: none;
+    }
+
     body {
         margin: 0;
         font-family: 'Segoe UI', Arial, sans-serif;
-        background: #050505;
-        color: #eaeaea;
+        background: #0a0a0a;
+        color: #ffffff;
         padding: 24px 16px 60px;
     }
     .wrap { max-width: 1180px; margin: 0 auto; }
 
     .topbar {
-        background: #111;
-        border: 1px solid #1c1c1c;
+        background: #050505;
+        border: 1px solid #1a1a1a;
         border-radius: 16px;
         padding: 18px 24px;
         margin-bottom: 22px;
@@ -28,26 +37,19 @@
     .tabs { display: flex; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
     .tab {
         flex: 1 1 0; min-width: 140px;
-        background: #111;
-        border: 1px solid #1c1c1c;
+        background: #050505;
+        border: 1px solid #1a1a1a;
         border-radius: 12px;
         padding: 16px 10px;
         text-align: center;
         font-size: 17px;
-        font-weight: 600;
-        color: #ddd;
+        font-weight: 700;
+        color: #ffffff;
         cursor: pointer;
         transition: 0.25s ease;
-        user-select: none;
     }
-    .tab:hover {
-        border-color: #5b21b6;
-        color: #fff;
-    }
-    .tab.active {
-        border-color: #a855f7;
-        color: #fff;
-    }
+    .tab:hover { border-color: #5b21b6; }
+    .tab.active { border-color: #a855f7; }
 
     .grid {
         display: grid;
@@ -59,27 +61,141 @@
     }
 
     .card {
-        background: #0d0d0d;
-        border: 1px solid #1c1c1c;
+        background: #050505;
+        border: 1px solid #1a1a1a;
         border-radius: 12px;
         padding: 18px 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        color: #eaeaea;
+        color: #ffffff;
         text-decoration: none;
         transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
     .card:hover {
-        border-color: #5b21b6;           /* тёмно-фиолетовый бордер */
+        border-color: #5b21b6;
         box-shadow: 0 0 0 1px #5b21b6 inset;
     }
 
     .card .name {
         font-size: 18px;
         font-weight: 700;
-        color: #fff;
+        color: #ffffff;
+    }
+
+    .tcp-container {
+        grid-column: 1 / -1;
+        background: #050505;
+        border: 1px solid #1a1a1a;
+        border-radius: 12px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+    .tcp-container > .container-title {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        padding-bottom: 6px;
+    }
+
+    .card-expand {
+        background: #050505;
+        border: 1px solid #1a1a1a;
+        border-radius: 12px;
+        padding: 0;
+        display: block;
+        text-align: left;
+        overflow: hidden;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card-expand:hover {
+        border-color: #5b21b6;
+        box-shadow: 0 0 0 1px #5b21b6 inset;
+    }
+
+    .card-expand > .card-title {
+        display: block;
+        padding: 18px 20px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+        transition: background 0.2s ease;
+    }
+    .card-expand > .card-title:hover {
+        background: #0f0f0f;
+    }
+    .card-expand > .card-title .arrow {
+        display: inline-block;
+        margin-left: 8px;
+        font-size: 12px;
+        color: #777;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-expand.open > .card-title .arrow {
+        transform: rotate(180deg);
+        transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Свертывание быстрее (0.35s), раскрытие медленнее (0.7s) */
+    .card-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-top-width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-top: 0 solid #1a1a1a;
+    }
+    .card-expand.open > .card-body {
+        max-height: 3000px;
+        border-top-width: 1px;
+        transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-top-width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-inner {
+        padding: 16px 20px 18px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.8;
+        color: #ffffff;
+    }
+
+    .param-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px 32px;
+    }
+    @media (max-width: 720px) {
+        .param-cols { grid-template-columns: 1fr; }
+    }
+    .param-col {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+    .param-line {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+    }
+    .param-line .pname { color: #ffffff; }
+    .param-line .pval  { color: #a855f7; font-weight: 700; }
+
+    .param-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .param-group .group-title {
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 2px;
     }
 
     .section { display: none; }
@@ -89,33 +205,21 @@
         from { opacity: 0; transform: translateY(14px); }
         to   { opacity: 1; transform: translateY(0); }
     }
-    .section.active .card {
-        animation: fadeUp 0.35s ease both;
-    }
-    .section.active .card:nth-child(1)  { animation-delay: 0.00s; }
-    .section.active .card:nth-child(2)  { animation-delay: 0.03s; }
-    .section.active .card:nth-child(3)  { animation-delay: 0.06s; }
-    .section.active .card:nth-child(4)  { animation-delay: 0.09s; }
-    .section.active .card:nth-child(5)  { animation-delay: 0.12s; }
-    .section.active .card:nth-child(6)  { animation-delay: 0.15s; }
-    .section.active .card:nth-child(7)  { animation-delay: 0.18s; }
-    .section.active .card:nth-child(8)  { animation-delay: 0.21s; }
-    .section.active .card:nth-child(9)  { animation-delay: 0.24s; }
-    .section.active .card:nth-child(10) { animation-delay: 0.27s; }
-    .section.active .card:nth-child(11) { animation-delay: 0.30s; }
-    .section.active .card:nth-child(12) { animation-delay: 0.33s; }
+    .section.active .card,
+    .section.active .tcp-container { animation: fadeUp 0.35s ease both; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
     <div class="topbar">
-        <h1>Мои закладки</h1>
+        <h1>All in One</h1>
     </div>
 
     <div class="tabs">
         <div class="tab active" data-target="setup">Setup</div>
         <div class="tab" data-target="tweaks">Tweaks</div>
+        <div class="tab" data-target="manual-tweaks">Manual Tweaks</div>
         <div class="tab" data-target="cheats">Cheats</div>
         <div class="tab" data-target="block">Запрет</div>
     </div>
@@ -146,6 +250,147 @@
         <a class="card" href="https://www.mediafire.com/file/n0jxkm6a0g6tqbv/WinCry.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">WinCry</span></a>
     </div>
 
+    <!-- MANUAL TWEAKS -->
+    <div class="section grid" id="manual-tweaks">
+
+        <div class="tcp-container">
+            <div class="container-title">TcpOptimizer</div>
+
+            <div class="card-expand">
+                <div class="card-title">General Settings <span class="arrow">▼</span></div>
+                <div class="card-body">
+                    <div class="card-inner">
+                        <div class="param-cols">
+                            <div class="param-col">
+                                <div class="param-line"><span class="pname">TCP Window Auto-Tuning:</span><span class="pval">normal</span></div>
+                                <div class="param-line"><span class="pname">Windows Scaling heuristics:</span><span class="pval">disabled</span></div>
+                                <div class="param-line"><span class="pname">Congestion Control Provider:</span><span class="pval">CUBIC</span></div>
+                                <div class="param-line"><span class="pname">Receive-Side Scaling (RSS):</span><span class="pval">enabled</span></div>
+                                <div class="param-line"><span class="pname">R. Segment Coalescing (RSC):</span><span class="pval">disabled</span></div>
+                            </div>
+                            <div class="param-col">
+                                <div class="param-line"><span class="pname">Time to Live (TTL):</span><span class="pval">64</span></div>
+                                <div class="param-line"><span class="pname">ECN Capability:</span><span class="pval">disabled</span></div>
+                                <div class="param-line"><span class="pname">Checksum Offloading:</span><span class="pval">enabled</span></div>
+                                <div class="param-line"><span class="pname">TCP Chimney Offload:</span><span class="pval">disabled</span></div>
+                                <div class="param-line"><span class="pname">Large Send Offload (LSO):</span><span class="pval">disabled</span></div>
+                                <div class="param-line"><span class="pname">TCP 1323 Timestamps:</span><span class="pval">enabled</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-expand">
+                <div class="card-title">Advanced Settings <span class="arrow">▼</span></div>
+                <div class="card-body">
+                    <div class="card-inner">
+                        <div class="param-cols">
+                            <div class="param-col">
+                                <div class="param-group">
+                                    <div class="group-title">Internet Explorer Optimization</div>
+                                    <div class="param-line"><span class="pname">MaxConnectionsPer1_0Server:</span><span class="pval">10</span></div>
+                                    <div class="param-line"><span class="pname">MaxConnectionsPerServer:</span><span class="pval">10</span></div>
+                                </div>
+                                <div class="param-group">
+                                    <div class="group-title">Host Resolution Priority</div>
+                                    <div class="param-line"><span class="pname">LocalPriority:</span><span class="pval">4</span></div>
+                                    <div class="param-line"><span class="pname">HostPriority:</span><span class="pval">5</span></div>
+                                    <div class="param-line"><span class="pname">DnsPriority:</span><span class="pval">6</span></div>
+                                    <div class="param-line"><span class="pname">NetbtPriority:</span><span class="pval">7</span></div>
+                                </div>
+                                <div class="param-group">
+                                    <div class="group-title">Retransmissions</div>
+                                    <div class="param-line"><span class="pname">Max SYN Retransmissions:</span><span class="pval">2</span></div>
+                                    <div class="param-line"><span class="pname">NonSackRttResiliency:</span><span class="pval">disabled</span></div>
+                                </div>
+                                <div class="param-group">
+                                    <div class="group-title">Retransmit Timeout (RTO)</div>
+                                    <div class="param-line"><span class="pname">Initial RTO:</span><span class="pval">2000</span></div>
+                                    <div class="param-line"><span class="pname">Min RTO:</span><span class="pval">300</span></div>
+                                </div>
+                            </div>
+                            <div class="param-col">
+                                <div class="param-group">
+                                    <div class="group-title">Type/Quality of Service</div>
+                                    <div class="param-line"><span class="pname">QoS: NonBestEffortLimit:</span><span class="pval">0</span></div>
+                                    <div class="param-line"><span class="pname">QoS: Do not use NLA:</span><span class="pval">optimal: 1</span></div>
+                                </div>
+                                <div class="param-group">
+                                    <div class="group-title">Gaming Tweak - Network Throttling Index</div>
+                                    <div class="param-line"><span class="pname">Network ThrottlingIndex:</span><span class="pval">disabled: ffffffff</span></div>
+                                    <div class="param-line"><span class="pname">SystemResponsiveness:</span><span class="pval">gaming: 0</span></div>
+                                </div>
+                                <div class="param-group">
+                                    <div class="group-title">Gaming Tweak - Disable Nagle's algorithm</div>
+                                    <div class="param-line"><span class="pname">TcpAckFrequency:</span><span class="pval">disabled: 1</span></div>
+                                    <div class="param-line"><span class="pname">TCPNoDelay:</span><span class="pval">enabled: 1</span></div>
+                                    <div class="param-line"><span class="pname">TcpDelAckTicks:</span><span class="pval">disabled: 0</span></div>
+                                </div>
+                                <div class="param-group">
+                                    <div class="group-title">Network Memory Allocation</div>
+                                    <div class="param-line"><span class="pname">LargeSystemCache:</span><span class="pval">disabled: 0</span></div>
+                                    <div class="param-line"><span class="pname">Size:</span><span class="pval">optimized: 3</span></div>
+                                </div>
+                                <div class="param-group">
+                                    <div class="group-title">Dynamic Port Allocation</div>
+                                    <div class="param-line"><span class="pname">MaxUserPort:</span><span class="pval">65534</span></div>
+                                    <div class="param-line"><span class="pname">TcpTimedWaitDelay:</span><span class="pval">30</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tcp-container">
+            <div class="container-title">Network Adapter Settings</div>
+
+            <div class="card-expand">
+                <div class="card-title">Adapter Properties <span class="arrow">▼</span></div>
+                <div class="card-body">
+                    <div class="card-inner">
+                        <div class="param-cols">
+                            <div class="param-col">
+                                <div class="param-line"><span class="pname">Power Saving Mode:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">VLAN ID:</span><span class="pval">0</span></div>
+                                <div class="param-line"><span class="pname">Wake on Magic Packet:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Auto Disable Gigabit:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Jumbo Frame:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Transmit Buffers:</span><span class="pval"></span></div>
+                                <div class="param-line"><span class="pname">Receive Buffers:</span><span class="pval"></span></div>
+                                <div class="param-line"><span class="pname">Shutdown Wake-On-Lan:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Pattern Match Wake-Up:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Wake on Pattern Match:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">ARP Offload:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">NS Offload:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Green Ethernet:</span><span class="pval">Disabled</span></div>
+                            </div>
+                            <div class="param-col">
+                                <div class="param-line"><span class="pname">IPv4 Checksum Offload:</span><span class="pval">Enabled</span></div>
+                                <div class="param-line"><span class="pname">TCP Checksum Offload (IPv4):</span><span class="pval">Enabled</span></div>
+                                <div class="param-line"><span class="pname">UDP Checksum Offload (IPv4):</span><span class="pval">Enabled</span></div>
+                                <div class="param-line"><span class="pname">Maximum Number of RSS Queues:</span><span class="pval">4</span></div>
+                                <div class="param-line"><span class="pname">Interrupt Moderation:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Receive Side Scaling:</span><span class="pval">Enabled</span></div>
+                                <div class="param-line"><span class="pname">Priority & VLAN:</span><span class="pval">Priority & VLAN Disabled</span></div>
+                                <div class="param-line"><span class="pname">Large Send Offload v2 (IPv4):</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Large Send Offload v2 (IPv6):</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Network Address:</span><span class="pval"></span></div>
+                                <div class="param-line"><span class="pname">Speed & Duplex:</span><span class="pval">1 GB/s Full Duplex</span></div>
+                                <div class="param-line"><span class="pname">Flow Control:</span><span class="pval">Disabled</span></div>
+                                <div class="param-line"><span class="pname">Energy Efficient Ethernet (EEE):</span><span class="pval">Disabled</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <!-- CHEATS -->
     <div class="section grid" id="cheats">
         <a class="card" href="https://www.mediafire.com/file/sy5vgb2phqqo4h7/slinky.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">Slinky Crack</span></a>
@@ -161,6 +406,41 @@
 </div>
 
 <script>
+    document.querySelectorAll('.card-expand > .card-title').forEach(title => {
+        title.addEventListener('click', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            title.parentElement.classList.toggle('open');
+        });
+    });
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+
+    document.addEventListener('copy', e => {
+        e.preventDefault();
+        e.clipboardData.setData('text/plain', '');
+    });
+    document.addEventListener('cut', e => {
+        e.preventDefault();
+        e.clipboardData.setData('text/plain', '');
+    });
+
+    document.addEventListener('keydown', e => {
+        const k = e.key.toLowerCase();
+
+        if ((e.ctrlKey || e.metaKey) && ['c','x','a','u','s','p'].includes(k)) {
+            e.preventDefault();
+            return false;
+        }
+        if (e.key === 'F12') { e.preventDefault(); return false; }
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(k)) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
     const tabs = document.querySelectorAll('.tab');
     const sections = document.querySelectorAll('.section');
     tabs.forEach(tab => {
