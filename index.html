@@ -1,72 +1,176 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setup and .exe</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a; 
-            color: white;
-            text-align: center;
-            padding: 50px 20px;
-        }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        h1 {
-            margin-bottom: 30px;
-        }
-        .link-btn {
-            display: block;
-            background-color: #333;
-            color: white;
-            text-decoration: none; 
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px; 
-            transition: 0.3s;
-            border: 1px solid #444;
-        }
-        .link-btn:hover {
-            background-color: #007bff; 
-            border-color: #007bff;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мои закладки</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #050505;
+        color: #eaeaea;
+        padding: 24px 16px 60px;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; }
+
+    .topbar {
+        background: #111;
+        border: 1px solid #1c1c1c;
+        border-radius: 16px;
+        padding: 18px 24px;
+        margin-bottom: 22px;
+        text-align: center;
+    }
+    .topbar h1 { font-size: 22px; margin: 0; font-weight: 700; }
+
+    .tabs { display: flex; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
+    .tab {
+        flex: 1 1 0; min-width: 140px;
+        background: #111;
+        border: 1px solid #1c1c1c;
+        border-radius: 12px;
+        padding: 16px 10px;
+        text-align: center;
+        font-size: 17px;
+        font-weight: 600;
+        color: #ddd;
+        cursor: pointer;
+        transition: 0.25s ease;
+        user-select: none;
+    }
+    .tab:hover {
+        border-color: #5b21b6;
+        color: #fff;
+    }
+    .tab.active {
+        border-color: #a855f7;
+        color: #fff;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+    @media (max-width: 720px) {
+        .grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+        background: #0d0d0d;
+        border: 1px solid #1c1c1c;
+        border-radius: 12px;
+        padding: 18px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #eaeaea;
+        text-decoration: none;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card:hover {
+        border-color: #5b21b6;           /* тёмно-фиолетовый бордер */
+        box-shadow: 0 0 0 1px #5b21b6 inset;
+    }
+
+    .card .name {
+        font-size: 18px;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .section { display: none; }
+    .section.active { display: grid; }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(14px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .section.active .card {
+        animation: fadeUp 0.35s ease both;
+    }
+    .section.active .card:nth-child(1)  { animation-delay: 0.00s; }
+    .section.active .card:nth-child(2)  { animation-delay: 0.03s; }
+    .section.active .card:nth-child(3)  { animation-delay: 0.06s; }
+    .section.active .card:nth-child(4)  { animation-delay: 0.09s; }
+    .section.active .card:nth-child(5)  { animation-delay: 0.12s; }
+    .section.active .card:nth-child(6)  { animation-delay: 0.15s; }
+    .section.active .card:nth-child(7)  { animation-delay: 0.18s; }
+    .section.active .card:nth-child(8)  { animation-delay: 0.21s; }
+    .section.active .card:nth-child(9)  { animation-delay: 0.24s; }
+    .section.active .card:nth-child(10) { animation-delay: 0.27s; }
+    .section.active .card:nth-child(11) { animation-delay: 0.30s; }
+    .section.active .card:nth-child(12) { animation-delay: 0.33s; }
+</style>
 </head>
 <body>
+<div class="wrap">
 
-    <div class="container">
+    <div class="topbar">
         <h1>Мои закладки</h1>
-
-        <a href="https://www.mediafire.com/file/62c9z67cy3sh4ci/BoosterX.exe/file" target="_blank" class="link-btn">BoosterX</a>
-        <a href="https://www.mediafire.com/file/u6ijddap9eh2xel/DiscordSetup.exe/file" target="_blank" class="link-btn">DiscordSetup</a>
-        <a href="https://www.mediafire.com/file/rj7uopwmx6po6yj/SteamSetup.exe/file" target="_blank" class="link-btn">SteamSetup</a>
-        <a href="https://www.mediafire.com/file/ikl6o98dqv7knq9/VencordInstaller.exe/file" target="_blank" class="link-btn">Vencord</a>
-        <a href="https://www.mediafire.com/file/twtdjzgi303smlb/VSCodeUserSetup-x64-1.142.0.exe/file" target="_blank" class="link-btn">VS</a>
-        <a href="https://www.mediafire.com/file/n0jxkm6a0g6tqbv/WinCry.exe/file" target="_blank" class="link-btn">WinCry</a>
-        <a href="https://www.mediafire.com/file/t4h40t8t8n4pv0z/Badlion_Client_Setup_4.3.0.exe/file" target="_blank" class="link-btn">Badlion Client</a>
-        <a href="https://www.mediafire.com/file/wjbzeb7a1tywfd0/Lunar_Client_-_Installer.exe/file" target="_blank" class="link-btn">Lunar Client</a>
-        <a href="https://www.mediafire.com/file/anmnpkyyl7e50v4/Drip_Lite_Crack.exe/file" target="_blank" class="link-btn">Drip Crack(clean)</a>
-        <a href="https://www.mediafire.com/file/sy5vgb2phqqo4h7/slinky.exe/file" target="_blank" class="link-btn">SlinkyCrack(latest)</a>
-        <a href="https://www.mediafire.com/file/0mt0itv1ugrlb0v/Vape_V4.21_Sabaru.rar/file" target="_blank" class="link-btn">VapeV4.21(clean)</a>
-        <a href="https://www.mediafire.com/file/m9u2lzka73spmwt/Hone_-_Installer.exe/file" target="_blank" class="link-btn">Hone</a>
-        <a href="https://www.mediafire.com/file/n823sgxkj4ote5s/RagoOptimizer-Setup.exe/file" target="_blank" class="link-btn">Rago Optimizer</a>
-        <a href="https://www.mediafire.com/file/d9fb2mfbppqgk8n/Install_Win11_Win10_10080_DMAROFF_09222026.zip/file" target="_blank" class="link-btn">Network Adapter Driver</a>
-        
-        <a href="https://one.one.one.one" target="_blank" class="link-btn">CloudFlare Warp</a>
-        <a href="https://github.com/Flowseal/zapret-discord-youtube/releases" target="_blank" class="link-btn">zapret-discord-youtube</a>
-        <a href="https://www.techpowerup.com/download/techpowerup-nvcleanstall/" target="_blank" class="link-btn">NVCleanstall</a>
-        <a href="https://brave.com" target="_blank" class="link-btn">Brave</a>
-        <a href="https://www.google.com/chrome" target="_blank" class="link-btn">Google Chrome</a>
-        <a href="https://cheatbreaker.net/" target="_blank" class="link-btn">CheatBreaker</a>
-        <a href="https://cheatengine.org/" target="_blank" class="link-btn">CheatEngine</a>
-        <a href="https://www.speedguide.net/downloads.php" target="_blank" class="link-btn">TcpOptimizer</a>
-        <a href="https://one.one.one.one" target="_blank" class="link-btn">Hone Optimizer</a>
-        <a href="https://one.one.one.one" target="_blank" class="link-btn">Rago Optimizer</a>
     </div>
 
+    <div class="tabs">
+        <div class="tab active" data-target="setup">Setup</div>
+        <div class="tab" data-target="tweaks">Tweaks</div>
+        <div class="tab" data-target="cheats">Cheats</div>
+        <div class="tab" data-target="block">Запрет</div>
+    </div>
+
+    <!-- SETUP -->
+    <div class="section grid active" id="setup">
+        <a class="card" href="https://www.mediafire.com/file/rj7uopwmx6po6yj/SteamSetup.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">SteamSetup</span></a>
+        <a class="card" href="https://brave.com" target="_blank" rel="noopener noreferrer"><span class="name">Brave</span></a>
+        <a class="card" href="https://www.google.com/chrome" target="_blank" rel="noopener noreferrer"><span class="name">Chrome</span></a>
+        <a class="card" href="https://www.mediafire.com/file/wjbzeb7a1tywfd0/Lunar_Client_-_Installer.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">Lunar Client</span></a>
+        <a class="card" href="https://www.mediafire.com/file/t4h40t8t8n4pv0z/Badlion_Client_Setup_4.3.0.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">Badlion Client</span></a>
+        <a class="card" href="https://cheatbreaker.net/" target="_blank" rel="noopener noreferrer"><span class="name">CheatBreaker</span></a>
+        <a class="card" href="https://cheatengine.org/" target="_blank" rel="noopener noreferrer"><span class="name">CheatEngine</span></a>
+        <a class="card" href="https://www.mediafire.com/file/ikl6o98dqv7knq9/VencordInstaller.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">Vencord</span></a>
+        <a class="card" href="https://www.mediafire.com/file/u6ijddap9eh2xel/DiscordSetup.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">Discord</span></a>
+        <a class="card" href="https://www.mediafire.com/file/twtdjzgi303smlb/VSCodeUserSetup-x64-1.142.0.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">VS Code</span></a>
+        <a class="card" href="https://one.one.one.one" target="_blank" rel="noopener noreferrer"><span class="name">CloudFlare Warp</span></a>
+    </div>
+
+    <!-- TWEAKS -->
+    <div class="section grid" id="tweaks">
+        <a class="card" href="https://www.mediafire.com/file/d9fb2mfbppqgk8n/Install_Win11_Win10_10080_DMAROFF_09222026.zip/file" target="_blank" rel="noopener noreferrer"><span class="name">Network Adapter</span></a>
+        <a class="card" href="https://www.mediafire.com/file/m9u2lzka73spmwt/Hone_-_Installer.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">Hone</span></a>
+        <a class="card" href="https://www.mediafire.com/file/n823sgxkj4ote5s/RagoOptimizer-Setup.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">Rago Optimizer</span></a>
+        <a class="card" href="https://www.speedguide.net/downloads.php" target="_blank" rel="noopener noreferrer"><span class="name">TcpOptimizer</span></a>
+        <a class="card" href="https://www.techpowerup.com/download/techpowerup-nvcleanstall/" target="_blank" rel="noopener noreferrer"><span class="name">NVCleanstall</span></a>
+        <a class="card" href="https://www.mediafire.com/file/62c9z67cy3sh4ci/BoosterX.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">BoosterX</span></a>
+        <a class="card" href="https://www.mediafire.com/file/n0jxkm6a0g6tqbv/WinCry.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">WinCry</span></a>
+    </div>
+
+    <!-- CHEATS -->
+    <div class="section grid" id="cheats">
+        <a class="card" href="https://www.mediafire.com/file/sy5vgb2phqqo4h7/slinky.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">Slinky Crack</span></a>
+        <a class="card" href="https://www.mediafire.com/file/anmnpkyyl7e50v4/Drip_Lite_Crack.exe/file" target="_blank" rel="noopener noreferrer"><span class="name">Drip Lite</span></a>
+        <a class="card" href="https://www.mediafire.com/file/0mt0itv1ugrlb0v/Vape_V4.21_Sabaru.rar/file" target="_blank" rel="noopener noreferrer"><span class="name">Vape V4.21</span></a>
+    </div>
+
+    <!-- ЗАПРЕТ -->
+    <div class="section grid" id="block">
+        <a class="card" href="https://github.com/Flowseal/zapret-discord-youtube/releases" target="_blank" rel="noopener noreferrer"><span class="name">zapret-discord-youtube</span></a>
+    </div>
+
+</div>
+
+<script>
+    const tabs = document.querySelectorAll('.tab');
+    const sections = document.querySelectorAll('.section');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById(tab.dataset.target).classList.add('active');
+        });
+    });
+</script>
 </body>
 </html>
